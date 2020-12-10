@@ -130,6 +130,7 @@ list( APPEND ufo_test_input
   testinput/ompsnp_npp_L127.yaml
   testinput/ompstc_npp.yaml
   testinput/ompstc_npp_flipz.yaml
+  testinput/qc_practical_boundscheck.yaml
   testinput/processwhere.yaml
   testinput/parallel_obs_distribution.yaml
   testinput/parameters.yaml
@@ -1248,6 +1249,13 @@ ecbuild_add_test( TARGET  test_ufo_profileconsistencychecks_bkgqc_repobs_obsfilt
 ecbuild_add_test( TARGET  test_ufo_profileconsistencychecks_bkgqc_modobs_obsfilter
                   COMMAND ${CMAKE_BINARY_DIR}/bin/test_ObsFilters.x
                   ARGS    "testinput/profileconsistencychecks_bkgqc_modobs_obsfilter.yaml"
+                  ENVIRONMENT OOPS_TRAPFPE=1
+                  DEPENDS test_ObsFilters.x
+                  TEST_DEPENDS ufo_get_ufo_test_data )
+
+ecbuild_add_test( TARGET  test_ufo_qc_gen_practical_boundscheck
+                  COMMAND ${CMAKE_BINARY_DIR}/bin/test_ObsFilters.x
+                  ARGS    "testinput/qc_practical_boundscheck.yaml"
                   ENVIRONMENT OOPS_TRAPFPE=1
                   DEPENDS test_ObsFilters.x
                   TEST_DEPENDS ufo_get_ufo_test_data )
